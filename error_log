@@ -1,0 +1,2 @@
+[25-Aug-2016 20:22:09 America/Mexico_City] PHP Parse error:  syntax error, unexpected T_STRING, expecting ')' in /home/nsstore/public_html/yii/framework/base/CComponent.php(612) : eval()'d code on line 15
+[31-Oct-2016 15:42:19 America/Mexico_City] PHP Parse error:  syntax error, unexpected T_CONSTANT_ENCAPSED_STRING in /home/nsstore/public_html/cotizador/protected/modules/Joyeria/controllers/cotizaciones/actionGenerarPdf.php on line 112
