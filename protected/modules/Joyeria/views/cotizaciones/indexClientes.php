@@ -10,7 +10,7 @@ $this->breadcrumbs=array(
       'url' => CHtml::normalizeUrl(array('/Joyeria/cotizaciones/clientesCotizacion', 'id'=>1)),
       'style'=> 'float: left; margin-bottom: 10px;',
       'icon'=>"icon-plus",
-      'class'=>'clientes'
+      'class'=>'clientes boton-primary-alt'
     ));
   ?>
 

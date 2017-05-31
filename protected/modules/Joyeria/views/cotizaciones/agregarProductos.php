@@ -54,10 +54,6 @@ $this->breadcrumbs=array(
                     'style' => 'width: 10%;',    
                 ),
             ),
-             array(
-                'name'=>'producto.quantity', //this lookup works
-                // I need solution here to do filter & search of this relationship data field
-            ),
             'descripcion',
             array(
                 'header'=>'Categoría',

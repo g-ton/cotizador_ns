@@ -70,14 +70,14 @@ $this->breadcrumbs=array(
 
     <?php
       echo TbHtml::linkButton('Crear Otra Cotización', array(
-        'color'=> TbHtml::BUTTON_COLOR_WARNING, 
         'url' => CHtml::normalizeUrl(array('/Joyeria/cotizaciones/superIndex')),
         'style' => "margin-bottom: 10px",
+        'class' => "boton-primary-alt",
         ));
     ?>
     <center style="z-indez: -1;">
       <div class="row">
-        <div class="span4">
+        <div class="span3">
           <?php echo CHtml::label('Historial de Clientes', 'labelCliente', 
           array('style'=>'display: block; margin-right: 5px;', 'title'=>'Clientes registrados apartir de cotizaciones anteriores')); ?>
           <?php echo CHtml::dropDownList('cot_cliente','cliente', 
@@ -101,12 +101,12 @@ $this->breadcrumbs=array(
             )); ?>
 
         </div>
-        <div class="span4">
+        <div class="span3">
             <?php echo $form->labelEx($modelCotizacion,'nombre_cliente', array('title'=>'Persona a la que se le enviará la cotización')); ?>
             <?php echo $form->textField($modelCotizacion,'nombre_cliente', array('readonly'=>true)); ?>
             <?php echo $form->error($modelCotizacion,'nombre_cliente'); ?>
         </div>
-        <div class="span4">
+        <div class="span3">
             <?php echo $form->labelEx($modelCotizacion,'ejecutivo', array('title'=>'Persona que hace la cotización o venta')); ?>
             <?php echo $form->textField($modelCotizacion,'ejecutivo'); ?>
             <?php echo $form->error($modelCotizacion,'ejecutivo'); ?>
@@ -138,19 +138,19 @@ $this->breadcrumbs=array(
       </div>
 
       <div class="row">
-          <div class="span4">
+          <div class="span3">
               <?php echo $form->labelEx($modelCotizacion,'observaciones', array('title'=>"Observaciones y/o condiciones para la cotización")); ?>
               <?php echo $form->textArea($modelCotizacion,'observaciones',  array('maxlength' => 300, 'rows' => 5, 'cols' => 150)); ?>
               <?php echo $form->error($modelCotizacion,'observaciones'); ?>
           </div> 
-          <div class="span4">
+          <div class="span3">
              <?php echo CHtml::label('Validez', 'diasValidez', array('title'=>'Validez en tiempo de la cotización')); ?>
              <input name="diasValidez" type="number" id="diasValidez" min="0" max="100" style="width: 70px;" value=<?php echo $validez; ?> > Días 
           </div>
       </div>
       <?php echo $form->hiddenField($modelCotizacion,'id_original_cliente'); ?>
     </center>
-    <?php echo CHtml::submitButton('Guardar', array('class'=>'miBotonSuccess', 'name' => 'button1', 'title'=>'Se debe guardar primero para poder Imprimir o Enviar por mail la cotización')); ?>
+    <?php echo CHtml::submitButton('Guardar', array('class'=>'miBotonSuccess boton-default-alt', 'name' => 'button1', 'title'=>'Se debe guardar primero para poder Imprimir o Enviar por mail la cotización')); ?>
     <?php $this->endWidget(); ?>
 
   <div style="margin-bottom: 15px;">
@@ -161,7 +161,7 @@ $this->breadcrumbs=array(
               'url' => CHtml::normalizeUrl(array('/Joyeria/cotizaciones/generarPdf', 'token'=>$_GET['token'] ? $_GET['token'] : $_GET['tokenEdt'])),
               'icon'=>"icon-printer",
               'style'=> 'margin-right: 10px;',
-              'color'=> TbHtml::BUTTON_COLOR_PRIMARY,
+              'class'=> 'boton-primary-alt',
               ));
 
           echo TbHtml::ajaxSubmitButton('Enviar a Email', CHtml::normalizeUrl(array('/Joyeria/cotizaciones/generarPdf', 'token'=>$_GET['token'] ? $_GET['token'] : $_GET['tokenEdt'], 'email'=>1)),
@@ -193,13 +193,17 @@ $this->breadcrumbs=array(
       <button id="btnPorcentajeGlobal" type="button">Aplicar</button>
     <?php } ?>
   </div>
-  <div class="span2"></div>
-  <div class="span3">
+</div>
+
+<div class="row">
+<div class="offset3"></div>
+<div class="offset4 span3">
   <?php 
     //Botón para agregar producto manualmente
     echo TbHtml::linkButton('Agregar Producto Manualmente', array(
     'url' => CHtml::normalizeUrl(array('/Joyeria/cotizaciones/agregarProductoManual', 'token'=>$_GET['token'] ? $_GET['token'] : $_GET['tokenEdt'])),
     'class'=>'fancyBox',
+    'icon'=>"icon-plus",
     'style'=>"margin-bottom: 10px;",
     ));  
   ?>
@@ -209,17 +213,16 @@ $this->breadcrumbs=array(
   <?php 
     //Botón para lanzar CgridView en Dialog
     echo TbHtml::linkButton('Agregar Productos', array(
-      'color'=> TbHtml::BUTTON_COLOR_WARNING, 
       'id'=>"agregarProducto",
       'icon'=>"icon-plus",
-      //'style'=>"margin-bottom: 15px;",
-      'title'=>"Agregar productos a la cotización"
+      'title'=>"Agregar productos a la cotización",
+      'class'=>"boton-primary-alt",
     ));  
   ?>
   </div>
 </div>
 
-
+<div>
   <?php 
       $this->widget('bootstrap.widgets.TbGridView', array(
          'id'=>'Cotizaciones-grid',
@@ -378,6 +381,7 @@ $this->breadcrumbs=array(
          'htmlOptions' => array('style' => 'padding-top: 10px; overflow-x: auto;')
       ));
   ?>
+  </div>
 
   <?php
     $this->widget('application.extensions.fancybox.EFancyBox', array(

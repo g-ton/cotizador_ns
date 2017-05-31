@@ -10,6 +10,7 @@ $this->breadcrumbs=array(
       'url' => CHtml::normalizeUrl(array('/Joyeria/cotizaciones', 'token'=>$token)),
       'style'=> 'float: left; margin-bottom: 10px;',
       'icon'=>"icon-plus",
+      'class'=>"boton-primary-alt",
     ));
   ?>
 
@@ -19,6 +20,7 @@ $this->breadcrumbs=array(
        'id'=>'cotizacionesgral-grid',
        'dataProvider' => $modelCotizacion->search(),
        'type' => TbHtml::GRID_TYPE_CONDENSED,
+       // 'type' => TbHtml::GRID_TYPE_STRIPED,
        'emptyText'=> 'Resultados no encontrados',
        'filter' => $modelCotizacion,
        'afterAjaxUpdate' => "function(id,data){
@@ -26,25 +28,35 @@ $this->breadcrumbs=array(
           'showCloseButton': true, 'hideOnOverlayClick': false,});
                     }",
        'columns' => array(
-            'fecha_cotizacion',
-            'nombre_cliente',
+            array(
+              'name'=>'fecha_cotizacion',
+              'headerHtmlOptions' => array('class' => 'col-xl-2 col-sm-2 col-md-2 col-lg-2')
+            ),
+            array(
+              'name'=>'nombre_cliente',
+              'headerHtmlOptions' => array('class' => 'col-xl-2 col-sm-2 col-md-2 col-lg-2')
+            ),
             array(
               'name'=> 'email',
               'htmlOptions'=>array('color' =>'width: 60px'),
+              'headerHtmlOptions' => array('class' => 'col-xl-2 col-sm-2 col-md-2 col-lg-2')
             ),
             array(
               'name'=> 'ejecutivo',
               'visible'=> Yii::app()->request->cookies['tipodispositivo']->value== 1? false : true,
+              'headerHtmlOptions' => array('class' => 'col-xl-2 col-sm-2 col-md-2 col-lg-2')
             ),
             array(
               'name'=> 'clave_cotizacion',
               'visible'=> Yii::app()->request->cookies['tipodispositivo']->value== 1? false : true,
+              'headerHtmlOptions' => array('class' => 'col-xl-2 col-sm-2 col-md-2 col-lg-2')
             ),
             array(
               'header'=>'Opciones',
               'type'=>'raw',
               'value'=>'$data->getPdf()."&nbsp&nbsp".$data->getEditar()."&nbsp&nbsp".$data->getEmail()',
               'htmlOptions'=>array('style'=>'width:10%; font-size: 18px;'),
+              'headerHtmlOptions' => array('class' => 'col-xl-2 col-sm-2 col-md-2 col-lg-2')
             ),
         ),
        'htmlOptions' => array('style' => 'padding-top: 10px; overflow-x: auto; width: 100%;')

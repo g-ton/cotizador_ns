@@ -41,7 +41,7 @@
     <div class="row">
       <div class="span3">
          <?php echo $form->labelEx($model,'logo', array('title'=>"Observaciones y/o condiciones para la cotización")); ?>
-         <?$this->widget('ext.EFineUploader.EFineUploader',
+         <?php $this->widget('ext.EFineUploader.EFineUploader',
            array(
              'id'=>'FineUploader1',
              'config'=>array(
@@ -73,7 +73,7 @@
           ?>
           <img id="imagen1" src=<?php echo $imagen1; ?> class="imgProducto">
           <input type="hidden" id="imagen1In" name="hiddenImg1" value=<?php echo $input1; ?> >
-        </div>  
+      </div>  
       <div class="span3">
           <?php echo $form->labelEx($model,'departamento', array('title'=>'Persona a la que se le enviará la cotización')); ?>
           <?php echo $form->textField($model,'departamento'); ?>
@@ -84,13 +84,13 @@
           <?php echo $form->textField($model,'telefono'); ?>
           <?php echo $form->error($model,'telefono'); ?>
       </div>
+    </div>
+    <div class="row">
       <div class="span3">
           <?php echo $form->labelEx($model,'email'); ?>
           <?php echo $form->textField($model,'email'); ?>
           <?php echo $form->error($model,'email'); ?>
       </div>
-    </div>
-    <div class="row">
       <div class="span4">
           <?php echo $form->labelEx($model,'pagina_web'); ?>
           <?php echo $form->textField($model,'pagina_web', array('style'=>'width: 150px;')); ?>
@@ -114,26 +114,26 @@
             <?php echo $form->textField($model,'num_cuenta'); ?>
             <?php echo $form->error($model,'num_cuenta'); ?>
         </div>
+    </div>
+    <div class="row">
         <div class="span3">
             <?php echo $form->labelEx($model,'clabe', array('title'=>'Persona que hace la cotización o venta')); ?>
             <?php echo $form->textField($model,'clabe'); ?>
             <?php echo $form->error($model,'clabe'); ?>
         </div>
-    </div>
-    <div class="row">
         <div class="span4">
             <?php echo $form->labelEx($model,'inf_extra', array('title'=>"Observaciones y/o condiciones para la cotización")); ?>
-            <?php echo $form->textArea($model,'inf_extra',  array('maxlength' => 300, 'rows' => 1, 'cols' => 50)); ?>
+            <?php echo $form->textArea($model,'inf_extra',  array('maxlength' => 300, 'rows' => 2, 'cols' => 50)); ?>
             <?php echo $form->error($model,'inf_extra'); ?>
         </div> 
     </div>
 
     <div class="row">
         <div style="text-align: center;" >
-            <?php echo CHtml::submitButton('Guardar', array('class'=>'miBotonSuccess', 'name' => 'button1', 'title'=>'Se debe guardar primero para poder Imprimir o Enviar por mail la cotización')); ?>
+            <?php echo CHtml::submitButton('Guardar', array('class'=>'btn boton-primary-alt', 'name' => 'button1', 'title'=>'Se debe guardar primero para poder Imprimir o Enviar por mail la cotización')); ?>
             <?php
                 echo CHtml::link('Cancelar', array('superIndex'), array('confirm' => '¿Desea cancelar este registro?',
-                  'style' => 'margin-left:20px;', 'class' => 'btn'));
+                  'style' => 'margin-left:20px;', 'class' => 'btn boton-default-alt'));
             ?>
         </div> 
     </div>

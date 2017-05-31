@@ -1,0 +1,52 @@
+.boton-default-alt {
+    background-color: #f50;
+    border-color: #e64d00;
+    color: #fff;
+    background-image: unset;
+    text-shadow: unset;
+}
+.boton-default-alt:hover {
+    background-color: #fd4101;
+    border-color: #e64d00;
+    color: #fff;
+}
+.boton-primary-alt {
+    background-color: #59c2e6;
+    border-color: #59c2e6;
+    color: #ffffff;
+    background-image: unset;
+    text-shadow: unset;
+}
+.boton-primary-alt:hover {
+    background-color: #2db2df;
+    border-color: #24aede;
+    color: #ffffff;
+}
+
+@media (min-width: 992px) {
+	.w3-teal {
+	    display: none;
+	}
+}
+
+@media (min-width: 768px) {
+	.form-centrado{
+		margin-right: auto; 
+		margin-left: auto; 
+		width: 50%;
+		border: 1px solid #ddd;
+	}
+}
+
+@media (max-width: 767px) {
+	.form-centrado{
+		margin-right: auto; 
+		margin-left: auto; 
+		width: 100%;
+		text-align: center;
+	}
+}
+
+thead th {
+    background: unset;
+}
