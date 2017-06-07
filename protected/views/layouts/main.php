@@ -29,7 +29,7 @@
     <?php
     if(!Yii::app()->user->isGuest){
 	?>        	
-   	<div class="w3-sidebar w3-bar-block w3-collapse w3-card-2 w3-animate-left" style="width:200px; text-align: center;" id="mySidebar">
+   	<div class="w3-sidebar w3-bar-block w3-collapse w3-card-2" style="width:200px; text-align: center;" id="mySidebar">
    		<div style="padding: 10px 0;"><img src="images/logo_ns_ps.png"></div>
 		<button class="w3-bar-item w3-button w3-large w3-hide-large" onclick="w3_close()">Cerrar &times;</button>
 		<a href="index.php?r=Joyeria/cotizaciones/superIndex" class="w3-bar-item w3-button">Cotizaciones</a>

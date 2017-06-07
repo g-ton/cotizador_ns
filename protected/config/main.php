@@ -59,7 +59,7 @@ return array(
 		'user'=>array(
 			// enable cookie-based authentication
 			'allowAutoLogin'=>true,
-			'returnUrl'=>array('/site'),
+			'returnUrl'=>array('/Joyeria/cotizaciones/superIndex'),
 		),
 
 		'bootstrap' => array(
