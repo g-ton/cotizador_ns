@@ -18,7 +18,7 @@ class CotClientes extends CActiveRecord
 	public function getEditar()
     {
        $rutaControlador = Yii::app()->createUrl('Joyeria/cotizaciones/clientesCotizacion', array('id'=>1, 'idCliente'=>$this->id_cliente));
-       $editar = "<a href=$rutaControlador class=clientes><span class='icon-pencil'></span></a>";
+       $editar = "<a href=$rutaControlador class='clientes opciones-color'><span class='icon-pencil'></span></a>";
     
        return $editar;
     }
@@ -26,7 +26,7 @@ class CotClientes extends CActiveRecord
     public function getEliminar()
     {
        $rutaControlador = Yii::app()->createUrl('Joyeria/cotizaciones/eliminarCliente', array('idCliente'=>$this->id_cliente));
-       $eliminar = "<a href=$rutaControlador class=clientes><span class='icon-cross'></span></a>";
+       $eliminar = "<a href=$rutaControlador class='clientes opciones-color'><span class='icon-cross'></span></a>";
     
        return $eliminar;
     } 

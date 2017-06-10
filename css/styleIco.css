@@ -1,65 +1,90 @@
 @font-face {
-	font-family: 'icomoon';
-	src:url('fonts/icomoon.eot?lyc8by');
-	src:url('fonts/icomoon.eot?lyc8by#iefix') format('embedded-opentype'),
-		url('fonts/icomoon.ttf?lyc8by') format('truetype'),
-		url('fonts/icomoon.woff?lyc8by') format('woff'),
-		url('fonts/icomoon.svg?lyc8by#icomoon') format('svg');
-	font-weight: normal;
-	font-style: normal;
+  font-family: 'icomoon';
+  src:  url('fonts/icomoon.eot?9ckopo');
+  src:  url('fonts/icomoon.eot?9ckopo#iefix') format('embedded-opentype'),
+    url('fonts/icomoon.ttf?9ckopo') format('truetype'),
+    url('fonts/icomoon.woff?9ckopo') format('woff'),
+    url('fonts/icomoon.svg?9ckopo#icomoon') format('svg');
+  font-weight: normal;
+  font-style: normal;
 }
 
 [class^="icon-"], [class*=" icon-"] {
-	font-family: 'icomoon';
-	speak: none;
-	font-style: normal;
-	font-weight: normal;
-	font-variant: normal;
-	text-transform: none;
-	line-height: 1;
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'icomoon' !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  
+  /* Enable Ligatures ================ */
+  letter-spacing: 0;
+  -webkit-font-feature-settings: "liga";
+  -moz-font-feature-settings: "liga=1";
+  -moz-font-feature-settings: "liga";
+  -ms-font-feature-settings: "liga" 1;
+  font-feature-settings: "liga";
+  -webkit-font-variant-ligatures: discretionary-ligatures;
+  font-variant-ligatures: discretionary-ligatures;
 
-	/* Better Font Rendering =========== */
-	-webkit-font-smoothing: antialiased;
-	-moz-osx-font-smoothing: grayscale;
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 .icon-pencil:before {
-	content: "\e908";
+  content: "\e905";
+}
+.icon-folder:before {
+  content: "\e92f";
+}
+.icon-cart:before {
+  content: "\e93a";
 }
 .icon-printer:before {
-	content: "\e900";
+  content: "\e954";
 }
 .icon-user:before {
-	content: "\e901";
+  content: "\e971";
+}
+.icon-cog:before {
+  content: "\e994";
 }
 .icon-bin2:before {
-	content: "\e902";
+  content: "\e9ad";
 }
 .icon-eye:before {
-	content: "\e903";
+  content: "\e9ce";
 }
 .icon-plus:before {
-	content: "\e904";
+  content: "\ea0a";
 }
 .icon-minus:before {
-	content: "\e905";
+  content: "\ea0b";
 }
 .icon-cross:before {
-	content: "\e909";
+  content: "\ea0f";
 }
 .icon-checkmark:before {
-	content: "\e90a";
+  content: "\ea10";
 }
 .icon-enter:before {
-	content: "\e90b";
+  content: "\ea13";
 }
 .icon-exit:before {
-	content: "\e90c";
+  content: "\ea14";
 }
 .icon-mail4:before {
-	content: "\e906";
+  content: "\ea86";
 }
 .icon-file-pdf:before {
-	content: "\e907";
+  content: "\eadf";
+}
+
+/*Pinta las opciones de los grids*/
+.opciones-color{
+  color: #2DB2DF;
 }
 

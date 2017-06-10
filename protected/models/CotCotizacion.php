@@ -5,7 +5,7 @@ class CotCotizacion extends CActiveRecord
 	public function getEditar()
     {
        $rutaControlador = Yii::app()->createUrl('/Joyeria/cotizaciones', array('id'=>$this->id, 'tokenEdt'=>$this->token));
-       $editar = "<a href=$rutaControlador class=fancyBox title='Editar Cotización'><span class='icon-pencil'></span></a>";
+       $editar = "<a href=$rutaControlador class='fancyBox opciones-color' title='Editar Cotización'><span class='icon-pencil'></span></a>";
     
        return $editar;
     }
@@ -13,7 +13,7 @@ class CotCotizacion extends CActiveRecord
     public function getEliminar()
     {
        $rutaControlador = Yii::app()->createUrl('/Joyeria/cotizaciones/eliminarGral', array('id_cotizacion'=>$this->id));
-       $eliminar = "<a href=$rutaControlador class=cotizaciones title='Eliminar Cotización'><span class='icon-bin2'></span></a>";
+       $eliminar = "<a href=$rutaControlador class='cotizaciones opciones-color' title='Eliminar Cotización'><span class='icon-bin2'></span></a>";
     
        return $eliminar;
     }
@@ -25,7 +25,7 @@ class CotCotizacion extends CActiveRecord
       if(file_exists($rutaArchivo))
       {
       	$rutaControlador = Yii::app()->createUrl('/Joyeria/cotizaciones/descargarPdf', array('id_cotizacion'=>$this->id));
-        $pdf = "<a href=$rutaControlador title='Descargar cotización PDF'><span style='height: 16px;' class='icon-file-pdf'></span></a>";
+        $pdf = "<a href=$rutaControlador title='Descargar cotización PDF' class='opciones-color'><span style='height: 16px;' class='icon-file-pdf'></span></a>";
        }
       return $pdf;
     }
@@ -33,7 +33,7 @@ class CotCotizacion extends CActiveRecord
     public function getEmail()
     {
       	$rutaControlador = Yii::app()->createUrl('/Joyeria/cotizaciones/generarPdf', array('tokenEdt'=>$this->token, 'email'=>1));
-        $email = "<a class='emailLink' href=$rutaControlador title='Eviar por Email cotización PDF'><span style='height: 16px;' class='icon-mail4'></span></a>";
+        $email = "<a class='emailLink opciones-color' href=$rutaControlador title='Eviar por Email cotización PDF'><span style='height: 16px;' class='icon-mail4'></span></a>";
       return $email;
     }
 

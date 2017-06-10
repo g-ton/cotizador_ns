@@ -17,7 +17,7 @@ class CotCotizaciontmp extends CActiveRecord
 	public function getEliminar()
     {
        $rutaControlador = Yii::app()->createUrl('/Joyeria/cotizaciones/eliminar', array('id_cotizacion'=>$this->id));
-       $eliminar = "<a href=$rutaControlador class=fancyBox title='Eliminar producto de la cotización'><span class='icon-bin2'></span></a>";
+       $eliminar = "<a href=$rutaControlador class='fancyBox opciones-color' title='Eliminar producto de la cotización'><span class='icon-bin2'></span></a>";
     
        return $eliminar;
     }
