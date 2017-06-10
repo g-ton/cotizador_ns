@@ -8,17 +8,15 @@
 	<meta name="language" content="es" />
 
 	<!-- blueprint CSS framework -->
-	<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/screen.css" media="screen, projection" />
+	<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/screen.min.css" media="screen, projection" />
 	<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/print.css" media="print" />
 	<!--[if lt IE 8]>
 	<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/ie.css" media="screen, projection" />
 	<![endif]-->
 
-	<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/main.css" />
+	<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/main.min.css" />
 	<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/form.css" />
 	<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/styleIco.css">
-
-	<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/stacktable.css">
 
 	<title><?php echo CHtml::encode($this->pageTitle); ?></title>
 </head>
@@ -32,11 +30,11 @@
    	<div class="w3-sidebar w3-bar-block w3-collapse w3-card-2" style="width:200px; text-align: center;" id="mySidebar">
    		<div style="padding: 10px 0;"><img src="images/logo_ns_ps.png"></div>
 		<button class="w3-bar-item w3-button w3-large w3-hide-large" onclick="w3_close()">Cerrar &times;</button>
-		<a href="index.php?r=Joyeria/cotizaciones/superIndex" class="w3-bar-item w3-button">Cotizaciones</a>
-		<a href="index.php?r=Joyeria/cotizaciones/indexClientes" class="w3-bar-item w3-button">Clientes</a>
-		<a href="index.php?r=Joyeria/cotizaciones/configurarDatos" class="w3-bar-item w3-button">Configurar Plantilla</a>
-			<a href="index.php?r=site/logout" class="w3-bar-item w3-button">Salir</a>
-		<a href="http://nsstore.mx/e-commerce" class="w3-bar-item w3-button">Regresar a Comprar</a>
+		<a href="index.php?r=Joyeria/cotizaciones/superIndex" class="w3-bar-item w3-button"><span class='icon-folder'></span> Cotizaciones</a>
+		<a href="index.php?r=Joyeria/cotizaciones/indexClientes" class="w3-bar-item w3-button"><span class='icon-user'></span> Clientes</a>
+		<a href="index.php?r=Joyeria/cotizaciones/configurarDatos" class="w3-bar-item w3-button"><span class='icon-cog'></span> Configurar Plantilla</a>
+		<a href="index.php?r=site/logout" class="w3-bar-item w3-button"><span class='icon-exit'></span> Salir</a>
+		<a href="http://nsstore.mx/e-commerce" class="w3-bar-item w3-button"><span class='icon-cart'></span> Regresar a Comprar</a>
 	</div>
 
 	<div class="w3-main" style="margin-left:200px">
@@ -61,8 +59,8 @@
 	</div><!-- page -->
 </body>
 
-<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/sideBar.css">
-<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/estilos.css">
+<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/sideBar.min.css">
+<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/estilos.min.css">
 <script type="text/javascript">
 function w3_open() {
     document.getElementById("mySidebar").style.display = "block";
