@@ -25,6 +25,7 @@
  */
 class SlCotizaciones extends CActiveRecord
 {
+	const IVA = 16.00;
 	/**
 	 * @return string the associated database table name
 	 */

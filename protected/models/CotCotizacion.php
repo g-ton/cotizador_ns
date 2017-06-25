@@ -59,7 +59,7 @@ class CotCotizacion extends CActiveRecord
 			array('observaciones', 'length', 'max'=>500),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, fecha_cotizacion, fecha_validez, nombre_cliente, cargo, email, empresa, ejecutivo, clave_cotizacion, activo, id_usuario', 'safe', 'on'=>'search'),
+			array('id, fecha_cotizacion, fecha_validez, nombre_cliente, cargo, email, empresa, ejecutivo, clave_cotizacion, activo, id_usuario, id_original_cliente', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -91,6 +91,7 @@ class CotCotizacion extends CActiveRecord
 			'ejecutivo' => 'Ejecutivo',
 			'clave_cotizacion' => 'No. Cotización',
 			'id_usuario' => 'id_usuario',
+			'id_original_cliente' => 'id_original_cliente'
 		);
 	}
 
