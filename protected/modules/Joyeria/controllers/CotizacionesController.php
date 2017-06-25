@@ -16,13 +16,13 @@ class CotizacionesController extends Controller
             array('allow', // allow authenticated user to perform 'create' and 'update' actions
                 'actions'=>array('index', 'agregarProductos', 'eliminar', 'generarPdf', 'superIndex', 
                     'descargarPdf', 'eliminarGral', 'agregarProductoManual', 'clientesCotizacion', 'configurarDatos',
-                    'obtenerImagen', 'indexClientes', 'eliminarCliente'),
+                    'obtenerImagen', 'indexClientes', 'eliminarCliente', 'datosCliente'),
                 'roles'=>array('admin', 'usecommerce'),
             ),
 
             array('allow',
                 'actions'=>array('index', 'agregarProductos', 'eliminar', 'generarPdf', 'superIndex', 
-                    'descargarPdf', 'eliminarGral', 'agregarProductoManual', 'clientesCotizacion', 'indexClientes', 'eliminarCliente'),
+                    'descargarPdf', 'eliminarGral', 'agregarProductoManual', 'clientesCotizacion', 'indexClientes', 'eliminarCliente', 'datosCliente'),
                 'roles'=>array('vendedor'),
             ),
 
@@ -48,6 +48,7 @@ class CotizacionesController extends Controller
             'obtenerImagen' => 'application.modules.Joyeria.controllers.cotizaciones.actionObtenerImagen',
             'indexClientes' => 'application.modules.Joyeria.controllers.cotizaciones.actionIndexClientes',
             'eliminarCliente' => 'application.modules.Joyeria.controllers.cotizaciones.actionEliminarCliente',
+            'datosCliente' => 'application.modules.Joyeria.controllers.cotizaciones.actionDatosCliente',
         );
     }
 

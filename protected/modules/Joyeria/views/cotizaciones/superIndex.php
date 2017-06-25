@@ -87,21 +87,12 @@ $this->breadcrumbs=array(
                   $.blockUI({ message: '<strong><img src="../cotizador/images/cargando.png" /> Enviando...</strong>' });
                },       
                success: function(data) {
-                  if(data!= ''){
-                    smoke.alert("Error al enviar correo", function(e){
-                    }, {
-                      ok: "Aceptar",
-                      classname: "custom-class"
-                    });
-                  }
-
-                  else{
-                    smoke.alert("Correo Enviado!", function(e){
-                    }, {
-                      ok: "Aceptar",
-                      classname: "custom-class"
-                    });
-                  }
+                  var data = $.parseJSON(data);
+                  smoke.alert(data.mensaje, function(e){
+                  }, {
+                    ok: "Aceptar",
+                    classname: "custom-class"
+                  });
                },
                error: function() {
                   smoke.alert("Error en servidor", function(e){

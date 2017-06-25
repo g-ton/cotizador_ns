@@ -1,10 +1,4 @@
-<link rel="stylesheet" href="./css/chosen.css" />
-<script src="./js/chosen.jquery.js" type="text/javascript"></script>
-<script>
-    $(function () {
-        $(".chzn-select").chosen();
-    });
-</script>
+<script src="./js/modulos/cotizacionIndex.min.js" type="text/javascript"></script>
 
 <style>
     /* Propia Clase = PC*/
@@ -47,142 +41,96 @@
       #agregarProducto{float: right;}
     }
 </style>
+
 <?php
 $this->breadcrumbs=array(
   'Cotización',
 );
 ?>
 
-<!-- Formulario Cotización -->
-<div id="allDiv">
-    <?php if(Yii::app()->user->hasFlash('contact')){?>
-      <div class="flash-success">
-        <?php echo Yii::app()->user->getFlash('contact'); ?>
-      </div>
-    <?php } ?>
+<!-- Alerts para validaciones -->
+<div>
+   <div>
+    <div id="mensaje_validacion_error" class="alert alert-danger alert-dismissible" style="display: none">
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      <span id='mensaje_valor'></span>
+    </div>
 
-    <?php $form = $this->beginWidget('CActiveForm', array(
-    'enableClientValidation'=>true,
-    'htmlOptions'=>array(
-    'enctype' => 'multipart/form-data', 
-    'style' => 'font-size: 12px; margin-bottom: 5px;',),
-    )); ?>
+    <div id="mensaje_validacion_correcto" class="alert alert-success alert-dismissible" style="display: none">
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      <span id='mensaje_valor'></span>
+    </div>
+  </div>
+</div>
 
+<div class="row" style="margin-bottom: 10px;">
+  <div class="span3">
     <?php
       echo TbHtml::linkButton('Crear Otra Cotización', array(
         'url' => CHtml::normalizeUrl(array('/Joyeria/cotizaciones/superIndex')),
-        'style' => "margin-bottom: 10px",
-        'class' => "boton-primary-alt",
+        'style' => "margin-bottom: 10px"
         ));
     ?>
-    <center style="z-indez: -1;">
-      <div class="row">
-        <div class="span3">
-          <?php echo CHtml::label('Historial de Clientes', 'labelCliente', 
-          array('style'=>'display: block; margin-right: 5px;', 'title'=>'Clientes registrados apartir de cotizaciones anteriores')); ?>
-          <?php echo CHtml::dropDownList('cot_cliente','cliente', 
-            CHtml::listData(CotClientes::model()->findAll('id_usuario=:us AND estatus=:es',array(':us'=>Yii::app()->user->getId(), ':es'=>1)), 'id_cliente', 'concatened'), 
-            array('class'=>'chzn-select','empty'=>'--Seleccionar Cliente--', 'title'=>'Seleccione un cliente para obtener sus datos automáticamente',
-              'ajax' => array(
-                'type'=>'POST',
-                'dataType'=>'json',
-                'url'=>CController::createUrl('clientesCotizacion'), 
-                'update'=>'#comentari',
-                'success'=>'function(data){
-                  $("#CotCotizacion_nombre_cliente").val(data.nombre_cliente);
-                  $("#CotCotizacion_cargo").val(data.cargo);
-                  $("#CotCotizacion_tel1").val(data.tel1);
-                  $("#CotCotizacion_tel2").val(data.tel2);
-                  $("#CotCotizacion_email").val(data.email);
-                  $("#CotCotizacion_empresa").val(data.empresa);
-                  $("#CotCotizacion_id_original_cliente").val(data.id_original_cliente);
-                }', 
-              )
-            )); ?>
-
-        </div>
-        <div class="span3">
-            <?php echo $form->labelEx($modelCotizacion,'nombre_cliente', array('title'=>'Persona a la que se le enviará la cotización')); ?>
-            <?php echo $form->textField($modelCotizacion,'nombre_cliente', array('readonly'=>true)); ?>
-            <?php echo $form->error($modelCotizacion,'nombre_cliente'); ?>
-        </div>
-        <div class="span3">
-            <?php echo $form->labelEx($modelCotizacion,'ejecutivo', array('title'=>'Persona que hace la cotización o venta')); ?>
-            <?php echo $form->textField($modelCotizacion,'ejecutivo'); ?>
-            <?php echo $form->error($modelCotizacion,'ejecutivo'); ?>
-        </div>
-    </div>
-
-      <div class="row">
-        <div class="span2">
-            <?php echo $form->hiddenField($modelCotizacion,'cargo'); ?>
-        </div>
-        <div class="span4">
-            <?php echo $form->hiddenField($modelCotizacion,'tel1'); ?>
-        </div>
-        <div class="span2">
-            <?php echo $form->hiddenField($modelCotizacion,'tel2', array('style'=>'width: 150px;')); ?>
-        </div>
-      </div> 
-
-      <div class="row">
-          <div class="span4">
-              <?php echo $form->hiddenField($modelCotizacion,'email'); ?>
-          </div>
-          <div class="span4">
-              <?php echo $form->hiddenField($modelCotizacion,'empresa'); ?>
-          </div>
-          <div class="span4">
-              <?php echo $form->hiddenField($modelCotizacion,'fecha_cotizacion'); ?>
-          </div>
-      </div>
-
-      <div class="row">
-          <div class="span3">
-              <?php echo $form->labelEx($modelCotizacion,'observaciones', array('title'=>"Observaciones y/o condiciones para la cotización")); ?>
-              <?php echo $form->textArea($modelCotizacion,'observaciones',  array('maxlength' => 300, 'rows' => 5, 'cols' => 150)); ?>
-              <?php echo $form->error($modelCotizacion,'observaciones'); ?>
-          </div> 
-          <div class="span3">
-             <?php echo CHtml::label('Validez', 'diasValidez', array('title'=>'Validez en tiempo de la cotización')); ?>
-             <input name="diasValidez" type="number" id="diasValidez" min="0" max="100" style="width: 70px;" value=<?php echo $validez; ?> > Días 
-          </div>
-      </div>
-      <?php echo $form->hiddenField($modelCotizacion,'id_original_cliente'); ?>
-    </center>
-    <?php echo CHtml::submitButton('Guardar', array('class'=>'miBotonSuccess boton-default-alt', 'name' => 'button1', 'title'=>'Se debe guardar primero para poder Imprimir o Enviar por mail la cotización')); ?>
-    <?php $this->endWidget(); ?>
-
-  <div style="margin-bottom: 15px;">
-      <?php 
-        if($mostrarBtn== 1)
-        {
-         echo TbHtml::linkButton('Imprimir', array(
-              'url' => CHtml::normalizeUrl(array('/Joyeria/cotizaciones/generarPdf', 'token'=>$_GET['token'] ? $_GET['token'] : $_GET['tokenEdt'])),
-              'icon'=>"icon-printer",
-              'style'=> 'margin-right: 10px;',
-              'class'=> 'boton-primary-alt',
-              ));
-
-          echo TbHtml::ajaxSubmitButton('Enviar a Email', CHtml::normalizeUrl(array('/Joyeria/cotizaciones/generarPdf', 'token'=>$_GET['token'] ? $_GET['token'] : $_GET['tokenEdt'], 'email'=>1)),
-          array(
-              'type' => 'post',      
-              'beforeSend' => 'function() { $.blockUI({ message: "<strong><img src=\'../cotizador/images/cargando.png\' /> Enviando...</strong>" }); }',         
-              'success'=>'function() { 
-                $.unblockUI( {onUnblock: function() { 
-                    smoke.alert("Correo Enviado!", function(e){
-                    }, {
-                      ok: "Aceptar",
-                      classname: "custom-class"
-                    });
-                  }
-                }); 
-              }',         
-          ));
-        }       
-      ?>
   </div>
-</div><!-- Termina Form -->
+
+  <div class="span3">
+    <?php
+      echo TbHtml::linkButton('Datos del Cliente', array(
+        'color'=> TbHtml::BUTTON_COLOR_WARNING, 
+        'url' => CHtml::normalizeUrl(array('/Joyeria/cotizaciones/datosCliente', 'token'=>$_GET['token'] ? $_GET['token'] : $_GET['tokenEdt'])),
+        'style'=> 'float: left; margin-bottom: 10px;',
+        'icon'=>"icon-plus",
+        'class'=>'datosCliente boton-primary-alt'
+      ));
+    ?>
+  </div>
+
+  <div class="span3">
+    <?php $token_valor= $_GET['token'] ? $_GET['token'] : $_GET['tokenEdt']; ?>
+    <input type="hidden" id="token_input" value=<?php echo $token_valor; ?> >
+    <button id='btn_guardar' class='btn boton-default-alt'>Guardar</button>
+    <?php
+      $this->widget('application.extensions.fancybox.EFancyBox', array(
+        'target' => '.datosCliente',
+        'config' => array(
+            'titleShow' => true,
+            ),
+      ));
+    ?>
+  </div>
+</div>
+
+<!-- Controles para Enviar por mail e imprimir cotización ya Guardada -->
+<div class="row">
+  <div class='span6' id='controles_cotizacion' style="margin-bottom: 15px; display: none;">
+    <?php 
+      echo TbHtml::linkButton('Imprimir', array(
+        'url' => CHtml::normalizeUrl(array('/Joyeria/cotizaciones/generarPdf', 'token'=>$_GET['token'] ? $_GET['token'] : $_GET['tokenEdt'])),
+        'icon'=>"icon-printer",
+        'style'=> 'margin-right: 10px;',
+        'class'=> 'boton-primary-alt'
+      ));
+
+      echo TbHtml::ajaxSubmitButton('Enviar a Email', CHtml::normalizeUrl(array('/Joyeria/cotizaciones/generarPdf', 'token'=>$_GET['token'] ? $_GET['token'] : $_GET['tokenEdt'], 'email'=>1)),
+      array(
+        'type' => 'post',      
+        'beforeSend' => 'function() { $.blockUI({ message: "<strong><img src=\'../cotizador/images/cargando.png\' /> Enviando...</strong>" }); }',         
+        'success'=>'function(data) { 
+          var data = $.parseJSON(data);
+
+          $.unblockUI( {onUnblock: function() { 
+              smoke.alert(data.mensaje, function(e){
+              }, {
+                ok: "Aceptar",
+                classname: "custom-class"
+              });
+            }
+          }); 
+        }',         
+      ));      
+    ?>
+  </div>
+</div>
 
 <div class="row">
   <div class="span4">
@@ -195,30 +143,29 @@ $this->breadcrumbs=array(
   </div>
 </div>
 
-<div class="row">
-<div class="offset3"></div>
-<div class="offset4 span3">
-  <?php 
-    //Botón para agregar producto manualmente
-    echo TbHtml::linkButton('Agregar Producto Manualmente', array(
-    'url' => CHtml::normalizeUrl(array('/Joyeria/cotizaciones/agregarProductoManual', 'token'=>$_GET['token'] ? $_GET['token'] : $_GET['tokenEdt'])),
-    'class'=>'fancyBox',
-    'icon'=>"icon-plus",
-    'style'=>"margin-bottom: 10px;",
-    ));  
-  ?>
+<div class="row pull-right">
+  <div class="span3">
+    <?php 
+      //Botón para agregar producto manualmente
+      echo TbHtml::linkButton('Agregar Producto Manualmente', array(
+      'url' => CHtml::normalizeUrl(array('/Joyeria/cotizaciones/agregarProductoManual', 'token'=>$_GET['token'] ? $_GET['token'] : $_GET['tokenEdt'])),
+      'class'=>'fancyBox',
+      'icon'=>"icon-plus",
+      'style'=>"margin-bottom: 10px;",
+      ));  
+    ?>
   </div>
 
   <div class="span3">
-  <?php 
-    //Botón para lanzar CgridView en Dialog
-    echo TbHtml::linkButton('Agregar Productos', array(
-      'id'=>"agregarProducto",
-      'icon'=>"icon-plus",
-      'title'=>"Agregar productos a la cotización",
-      'class'=>"boton-primary-alt",
-    ));  
-  ?>
+    <?php 
+      //Botón para lanzar CgridView en Dialog
+      echo TbHtml::linkButton('Agregar Productos', array(
+        'id'=>"agregarProducto",
+        'icon'=>"icon-plus",
+        'title'=>"Agregar productos a la cotización",
+        'class'=>"boton-primary-alt",
+      ));  
+    ?>
   </div>
 </div>
 
@@ -378,7 +325,7 @@ $this->breadcrumbs=array(
                 'htmlOptions'=>array('style'=>'width: 200px; font-size: 20px;')
               ),
           ),
-         'htmlOptions' => array('style' => 'padding-top: 10px; overflow-x: auto;')
+         'htmlOptions' => array('style' => 'padding-top: 10px; overflow-x: auto; clear: right;')
       ));
   ?>
   </div>
@@ -489,64 +436,6 @@ $this->breadcrumbs=array(
      //-----------
     $this->endWidget('zii.widgets.jui.CJuiDialog');
   ?>
-  <script>
-    $(document).ready(function(){
-        $("#agregarProducto").click(function(){
-            $("#mydialog").dialog("open");
-            $("dialog[role='dialog']").css("left", "0px"); 
-            
-             //Resetear filtros del grid
-             var id='Productos-grid';
-             var inputSelector='#'+id+' .filters input, '+'#'+id+' .filters select';
-             $(inputSelector).each( function(i,o) {
-                  $(o).val('');
-             });
-             var data=$.param($(inputSelector));
-             $.fn.yiiGridView.update(id, {data: data});
-            return false;
-        });
-
-        // Evento para agregar porcentaje global a los productos
-        $("#btnPorcentajeGlobal").click(function(){
-          if($("#porcentajeGlobal").val()!= "")
-          { 
-            var cantidadPorcentaje= $("#porcentajeGlobal").val();
-            var idCotizaciones= [];
-            var precios= [];
-            var k= 0;
-            $("#Cotizaciones-grid table.items tr").each(function( i ) {
-              $("td", this).each(function( j ) {
-                if(i>1){
-                  if(j==2){
-                    idCotizaciones[k]= $(this).find(".idCotOculto").val();
-                    console.log($(this).find(".idCotOculto").val());
-                    k++;
-                  }
-                }
-              });
-            });
-
-            $.ajax({
-               url: 'index.php?r=Joyeria/productos/seleccionProductos',
-               data: {
-                  arrayIdCotizaciones: idCotizaciones,
-                  porcentajeGlobal: 1,
-                  cantidadPorcentaje: cantidadPorcentaje
-               },
-               type: 'POST',      
-               success: function(data) {
-                  $.fn.yiiGridView.update('Cotizaciones-grid'); alert('Porcentaje Aplicado');
-               },
-               error: function() {
-                  alert('Ha ocurrido un problema, intente de nuevo');
-               }
-            });
-          }
-          else
-            alert("Debe ingresar un dígito del 1 al 100");
-        });
-    });
-  </script>
 
 
 
