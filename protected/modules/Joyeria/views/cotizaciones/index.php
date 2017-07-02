@@ -79,7 +79,7 @@ $this->breadcrumbs=array(
         'color'=> TbHtml::BUTTON_COLOR_WARNING, 
         'url' => CHtml::normalizeUrl(array('/Joyeria/cotizaciones/datosCliente', 'token'=>$_GET['token'] ? $_GET['token'] : $_GET['tokenEdt'])),
         'style'=> 'float: left; margin-bottom: 10px;',
-        'icon'=>"icon-plus",
+        'icon'=>"icon-mas",
         'class'=>'datosCliente boton-primary-alt'
       ));
     ?>
@@ -150,7 +150,7 @@ $this->breadcrumbs=array(
       echo TbHtml::linkButton('Agregar Producto Manualmente', array(
       'url' => CHtml::normalizeUrl(array('/Joyeria/cotizaciones/agregarProductoManual', 'token'=>$_GET['token'] ? $_GET['token'] : $_GET['tokenEdt'])),
       'class'=>'fancyBox',
-      'icon'=>"icon-plus",
+      'icon'=>"icon-mas",
       'style'=>"margin-bottom: 10px;",
       ));  
     ?>
@@ -161,7 +161,7 @@ $this->breadcrumbs=array(
       //Botón para lanzar CgridView en Dialog
       echo TbHtml::linkButton('Agregar Productos', array(
         'id'=>"agregarProducto",
-        'icon'=>"icon-plus",
+        'icon'=>"icon-mas",
         'title'=>"Agregar productos a la cotización",
         'class'=>"boton-primary-alt",
       ));  
@@ -220,7 +220,15 @@ $this->breadcrumbs=array(
                               type: \'POST\',
                               data: { \'cantidadModificada\': textfieldvalue, \'id_cotizacion\': des},
                               url: \'index.php?r=Joyeria/productos/seleccionProductos\',
-                              complete: function() { $.fn.yiiGridView.update(\'Cotizaciones-grid\'); }
+                              complete: function() { 
+                                $.fn.yiiGridView.update(\'Cotizaciones-grid\', {
+                                    complete: function(jqXHR, status) {
+                                        if (status==\'success\'){
+                                          agregarTotal();
+                                        }
+                                    }
+                                });
+                              }
                           })  
                           return false;
                            });",
@@ -247,7 +255,14 @@ $this->breadcrumbs=array(
                           data: { \'precioModificado\': dropdownvalue, \'id_cotizacion\': des, \'precioSel\': 1},
                           url: \'index.php?r=Joyeria/productos/seleccionProductos\',
                           complete: function() { 
-                            $.fn.yiiGridView.update(\'Cotizaciones-grid\'); 
+                            $.fn.yiiGridView.update(\'Cotizaciones-grid\', {
+                                complete: function(jqXHR, status) {
+                                    if (status==\'success\'){
+                                      $(\'#\' + des + \'-porcentaje\').removeAttr(\'value\');
+                                      agregarTotal();
+                                    }
+                                }
+                            });
                           }
                       }) 
                     }
@@ -258,12 +273,12 @@ $this->breadcrumbs=array(
               array(
                 'name'=> 'precio_unitario',
                 'value'=>function($data){
-                        return number_format($data->precio_unitario*1.16, 2, '.', '');
+                    return number_format($data->precio_unitario*1.16, 2, '.', '');
                 },
                 'filter'=>false,
                 // Si el rol es admin o usecommerce se muestra la columna
                 'visible' => Yii::app()->session['rol_usuario']=='usecommerce' || Yii::app()->session['rol_usuario']=='admin'? true : false,
-                'htmlOptions'=>array('class'=>'precioUnitario', 'id'=>'$data->id'.$data->id, 'style' => 'width: 100px;',
+                'htmlOptions'=>array('class'=>'precioUnitario', 'style' => 'width: 100px;',
                   'title'=> 'Precio Unitario Original')
               ),
               array(
@@ -278,7 +293,15 @@ $this->breadcrumbs=array(
                               type: \'POST\',
                               data: { \'precioModificado\': textfieldvalue, \'id_cotizacion\': id},
                               url: \'index.php?r=Joyeria/productos/seleccionProductos\',
-                              complete: function() { $.fn.yiiGridView.update(\'Cotizaciones-grid\'); }
+                              complete: function() { 
+                                $.fn.yiiGridView.update(\'Cotizaciones-grid\', {
+                                    complete: function(jqXHR, status) {
+                                        if (status==\'success\'){
+                                          agregarTotal();
+                                        }
+                                    }
+                                });
+                              }
                           })  
                           return false;
                            });"
@@ -300,23 +323,32 @@ $this->breadcrumbs=array(
                               type: \'POST\',
                               data: { \'porcentajeModificado\': textfieldvalue, \'id_cotizacion\': id},
                               url: \'index.php?r=Joyeria/productos/seleccionProductos\',
-                              complete: function() { $.fn.yiiGridView.update(\'Cotizaciones-grid\'); }
-                          })  
+                              complete: function() { 
+                                $.fn.yiiGridView.update(\'Cotizaciones-grid\', {
+                                    complete: function(jqXHR, status) {
+                                        if (status==\'success\'){
+                                          agregarTotal();
+                                        }
+                                    }
+                                }); 
+                              }
+                          });
                           return false;
-                           });",
+                    });",
                   ));',
                 'type'=>'raw',
                 // Si el rol es admin o usecommerce se muestra la columna
                 'visible' => Yii::app()->session['rol_usuario']=='usecommerce' || Yii::app()->session['rol_usuario']=='admin'? true : false,
                 'htmlOptions'=>array('title'=> 'Puede modificar el costo del producto por porcentaje')
               ),
+              //Precio Total
               array(
                 'name'=> 'precio_tmp',
                 'value'=>function($data){
                     return number_format($data->precio_tmp*1.16, 2, '.', '');
                 },
                 'filter'=>false,
-                'htmlOptions'=>array('style'=>'width: 70px;')
+                'htmlOptions'=>array('style'=>'width: 70px;', 'class'=>'precio_total')
               ),
               array(
                 //'header'=>'Opciones',
@@ -328,6 +360,16 @@ $this->breadcrumbs=array(
          'htmlOptions' => array('style' => 'padding-top: 10px; overflow-x: auto; clear: right;')
       ));
   ?>
+    <table id='tabla_total' class="items table table-condensed">
+      <tr>
+        <td><b>Subtotal</b></td>
+        <td id='campo_subtotal'>0.00</td>
+      </tr>
+      <tr>
+        <td><b>Total</b></td>
+        <td id='campo_total'>0.00</td>
+      </tr>
+    </table>
   </div>
 
   <?php
@@ -381,8 +423,7 @@ $this->breadcrumbs=array(
                 'visible'=> Yii::app()->request->cookies['tipodispositivo']->value==1 ? false : true
             ),
             array(
-                'name'=>'producto.quantity', //this lookup works
-                // I need solution here to do filter & search of this relationship data field
+                'name'=>'producto.quantity'
             ),
             array(
                 'header'=>'Cant.',
@@ -394,7 +435,7 @@ $this->breadcrumbs=array(
               'template'=>'{down}',
               'buttons'=>array(
                   'down' => array(
-                      'label'=>'[O]',
+                      'label'=>'<span class="icon-mas"></span>',
                       'click'=>"function(){
                             var linkUrl= $(this).attr('href');
                             var linkDividido = linkUrl.split('&');
@@ -417,7 +458,13 @@ $this->breadcrumbs=array(
                                   duration: 2000,
                                   classname: 'custom-class'
                                 });
-                                $.fn.yiiGridView.update('Cotizaciones-grid'); 
+                                $.fn.yiiGridView.update('Cotizaciones-grid', {
+                                    complete: function(jqXHR, status) {
+                                        if (status=='success'){
+                                          agregarTotal();
+                                        }
+                                    }
+                                });
                               }
                           })
                           return false;
@@ -436,7 +483,3 @@ $this->breadcrumbs=array(
      //-----------
     $this->endWidget('zii.widgets.jui.CJuiDialog');
   ?>
-
-
-
-

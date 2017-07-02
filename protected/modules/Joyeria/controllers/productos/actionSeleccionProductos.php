@@ -48,6 +48,7 @@ class actionSeleccionProductos extends CAction {
                     $nuevoPrecioUnitario= $modelCotTmp->cantidad_tmp * $precioModificadoSinIva;
                     $modelCotTmp->precio_tmp= $nuevoPrecioUnitario;
                     $modelCotTmp->precio_modificado= $precioModificadoSinIva;
+                    $modelCotTmp->porcentaje= NULL;
                     
                     if($_POST['precioSel']== 1)
                         $modelCotTmp->selected_price= $_POST['precioModificado'];

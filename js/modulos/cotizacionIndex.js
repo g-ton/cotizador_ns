@@ -1,4 +1,6 @@
+const IVA = 1.16;
 $(document).ready(function(){
+  agregarTotal();
 
   //Evento que guarda la cotización y manda mensajes de validación 
   $('#btn_guardar').click(function(){
@@ -73,7 +75,6 @@ $(document).ready(function(){
           if(i>1){
             if(j==2){
               idCotizaciones[k]= $(this).find(".idCotOculto").val();
-              console.log($(this).find(".idCotOculto").val());
               k++;
             }
           }
@@ -89,14 +90,57 @@ $(document).ready(function(){
          },
          type: 'POST',      
          success: function(data) {
-            $.fn.yiiGridView.update('Cotizaciones-grid'); alert('Porcentaje Aplicado');
+            $.fn.yiiGridView.update('Cotizaciones-grid', {
+                complete: function(jqXHR, status) {
+                    if (status=='success'){
+                      $('#Cotizaciones-grid select').attr('value','empty')
+                      agregarTotal();
+                    }
+                }
+            });
+
+            smoke.alert('Porcentaje Aplicado', function(e){
+              
+            }, {
+              ok: "Aceptar",
+              classname: "custom-class"
+            });
          },
          error: function() {
-            alert('Ha ocurrido un problema, intente de nuevo');
+            smoke.alert('Ha ocurrido un problema, intente más tarde', function(e){
+              
+            }, {
+              ok: "Aceptar",
+              classname: "custom-class"
+            });
          }
       });
     }
-    else
-      alert("Debe ingresar un dígito del 1 al 100");
+    else{
+      smoke.alert('Debe ingresar un dígito del 1 al 100', function(e){
+        
+      }, {
+        ok: "Aceptar",
+        classname: "custom-class"
+      });
+    }
   });
 });
+
+/*Agrega las cantidades de subtotal y total de los productos contenidos en la cotización*/
+function agregarTotal(){
+  var precio_iva= 0;
+  var precio_sin_iva= 0;
+
+  $('#Cotizaciones-grid tbody tr .precio_total').each(function(index,element){
+      precio_iva+= parseFloat($(this).text());
+      precio_sin_iva+= parseFloat($(this).text());
+  });
+
+  if(precio_iva> 0 || precio_sin_iva>0){
+    precio_sin_iva= precio_sin_iva / IVA;
+
+    $('#tabla_total #campo_subtotal').text(precio_sin_iva.toFixed(2));
+    $('#tabla_total #campo_total').text(precio_iva.toFixed(2));
+  }
+}

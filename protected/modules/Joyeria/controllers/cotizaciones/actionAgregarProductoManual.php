@@ -66,7 +66,13 @@ class actionAgregarProductoManual extends CAction {
                     }
 
                     echo '<script>'; 
-                    echo '$.fn.yiiGridView.update("Cotizaciones-grid");';
+                    echo '$.fn.yiiGridView.update("Cotizaciones-grid", {
+                        complete: function(jqXHR, status) {
+                            if (status=="success"){
+                              agregarTotal();
+                            }
+                        }
+                    });';
                     echo "$.fancybox.close();";
                     echo '</script>';
                     Yii::app()->end();

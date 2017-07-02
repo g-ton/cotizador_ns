@@ -100,10 +100,15 @@
 }
 
 
-.dialog-buttons button {
+/*.dialog-buttons button {
   background-color: rgba(0,0,0,.85);
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#222222,endColorstr=#222222);
   border-radius: 0;
+  color: #fff;
+}*/
+.dialog-buttons button {
+  background-color: #59c2e6;
+  border-radius: 4px;
   color: #fff;
 }
 

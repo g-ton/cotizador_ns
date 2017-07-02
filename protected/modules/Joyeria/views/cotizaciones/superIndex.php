@@ -9,7 +9,7 @@ $this->breadcrumbs=array(
       'color'=> TbHtml::BUTTON_COLOR_WARNING, 
       'url' => CHtml::normalizeUrl(array('/Joyeria/cotizaciones', 'token'=>$token)),
       'style'=> 'float: left; margin-bottom: 10px;',
-      'icon'=>"icon-plus",
+      'icon'=>"icon-mas",
       'class'=>"boton-primary-alt",
     ));
   ?>

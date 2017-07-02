@@ -58,7 +58,8 @@
 .icon-eye:before {
   content: "\e9ce";
 }
-.icon-plus:before {
+/*se modifica el plus por mas para no interferir con bootstrap*/
+.icon-mas:before {
   content: "\ea0a";
 }
 .icon-minus:before {
